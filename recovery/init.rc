@@ -2,7 +2,7 @@ on early-init
     start ueventd
 
 on init
-    export PATH /system/sbin:/system/bin
+    export PATH /sbin
     export ANDROID_ROOT /system
     export ANDROID_DATA /data
     export EXTERNAL_STORAGE /sdcard
@@ -12,7 +12,10 @@ on init
     mkdir /sdcard
     mkdir /system
     mkdir /data
+    mkdir /data/data
     mkdir /cache
+    mkdir /mtdcache
+    mkdir /devlog
     mount /tmp /tmp tmpfs
 
     chown root shell /tmp
@@ -54,10 +57,15 @@ service detect_key /sbin/detect_key
 service offmode_charging /sbin/offmode_charging
     disabled
 
+service power_test /sbin/power_test
+    disabled
+    oneshot
+
 # Always start adbd on userdebug and eng builds
 on property:ro.debuggable=1
-    write /sys/class/android_usb/android0/enable 1
-    start adbd
+    #write /sys/class/android_usb/android0/enable 1
+    #start adbd
+    setprop service.adb.root 1
 
 # Restart adbd so it can run as root
 on property:service.adb.root=1
