@@ -16,9 +16,10 @@ endif
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
-    $(LOCAL_PATH)/sbin/choice_fn:recovery/root/sbin/choice_fn \
-    $(LOCAL_PATH)/sbin/offmode_charging:recovery/root/sbin/offmode_charging \
-    $(LOCAL_PATH)/sbin/detect_key:recovery/root/sbin/detect_key \
+    $(LOCAL_PATH)/recovery/sbin/choice_fn:recovery/root/sbin/choice_fn \
+    $(LOCAL_PATH)/recovery/sbin/offmode_charging:recovery/root/sbin/offmode_charging \
+    $(LOCAL_PATH)/recovery/sbin/detect_key:recovery/root/sbin/detect_key \
+    $(LOCAL_PATH)/recovery/sbin/power_test:recovery/root/sbin/power_test
 
 $(call inherit-product, build/target/product/full.mk)
 
